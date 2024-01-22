@@ -89,29 +89,6 @@ const taskInput = document.getElementById('taskInput');
       });
     }
 
-    function sortTasks(sortBy) {
-      let sortedTasks = [];
-      switch (sortBy) {
-        case 'name':
-          sortedTasks = tasks.slice().sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case 'date':
-          sortedTasks = tasks.slice().sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-          break;
-        case 'priority': 
-          sortedTasks = tasks.slice().sort((a, b) => {
-            const priorityOrder = ['high', 'medium', 'low']; // Define the order of priorities (you can priorities according to your requirements)
-            return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority);
-          });
-          break;
-      }
-      renderTasks(sortedTasks);
-      const sortButtons = document.querySelectorAll('.sort-container button');
-      sortButtons.forEach(button => {
-        button.classList.toggle('active', button.innerText.toLowerCase().includes(sortBy));
-      });
-    }
-
     function renderTasks(filteredTasks = tasks) {
       taskList.innerHTML = '';
       filteredTasks.forEach(task => renderTask(task));
@@ -183,20 +160,5 @@ const taskInput = document.getElementById('taskInput');
       }
     }
 
-    function toggleDarkMode() {
-      const body = document.body;
-      body.classList.toggle('dark-mode');
-      const isDarkMode = body.classList.contains('dark-mode');
-      localStorage.setItem('darkMode', isDarkMode);
-    }
-
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    darkModeToggle.addEventListener('change', toggleDarkMode);
-
-    function applyDarkModePreference() {
-      const isDarkMode = localStorage.getItem('darkMode') === 'true';
-      const body = document.body;
-      body.classList.toggle('dark-mode', isDarkMode);
-      darkModeToggle.checked = isDarkMode;
-    }
-    applyDarkModePreference();
+   
+  
